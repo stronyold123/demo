@@ -4,42 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Strona Sprzedażowa - Profesjonalna Oferta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f9;
-      color: #333;
+      background-color: #0d1117;
+      color: #e6edf3;
       line-height: 1.6;
     }
     header {
-      background: #1c1c1c;
+      background: linear-gradient(135deg, #1f2937, #111827);
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
     }
     header h1 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       margin-bottom: 10px;
     }
     header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
+      font-size: 1.25rem;
     }
     section {
       max-width: 900px;
-      margin: auto;
+      margin: -50px auto 40px;
       padding: 40px;
-      background-color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-top: -50px;
-      border-radius: 10px;
+      background-color: #161b22;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
     }
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 20px;
-      color: #333;
+      color: #58a6ff;
     }
     ul {
       margin: 20px 0;
@@ -51,41 +54,91 @@
     }
     .cta {
       display: inline-block;
-      background-color: #007bff;
+      background-color: #238636;
       color: white;
       padding: 15px 30px;
       text-align: center;
       text-decoration: none;
       font-size: 1.2rem;
-      border-radius: 5px;
+      border-radius: 6px;
       margin-top: 30px;
       transition: background-color 0.3s ease;
     }
     .cta:hover {
-      background-color: #0056b3;
+      background-color: #2ea043;
     }
     footer {
       text-align: center;
-      padding: 40px;
-      background-color: #2f2f2f;
-      color: white;
+      padding: 60px 20px;
+      background-color: #0d1117;
+      color: #8b949e;
     }
     footer p {
       font-size: 1rem;
     }
-    #contact-details {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #333;
-      margin-top: 30px;
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-    #contact-details span {
-      color: #007bff;
+    input, textarea {
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      background-color: #21262d;
+      color: #e6edf3;
+    }
+    button[type="submit"] {
+      background-color: #238636;
+      color: white;
+      padding: 14px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      text-decoration: underline;
+      transition: background-color 0.3s ease;
     }
-    .hidden {
-      display: none;
+    button[type="submit"]:hover {
+      background-color: #2ea043;
+    }
+    .faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .testimonial {
+      background-color: #21262d;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      font-style: italic;
+      color: #c9d1d9;
+    }
+    .g-recaptcha {
+      transform: scale(0.95);
+      transform-origin: 0 0;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    @media (max-width: 400px) {
+      .g-recaptcha {
+        transform: scale(0.88);
+        transform-origin: 0 0;
+      }
+    }
+    .direct-contact {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #8b949e;
+      line-height: 1.8;
+    }
+    .direct-contact a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    .direct-contact a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -101,33 +154,100 @@
   <ul>
     <li>Responsywną stronę 1-pager, idealną do Twojej branży</li>
     <li>Przyciągający uwagę tekst oferty</li>
-    <li>Ewentualne wsparcie</li>
+    <li>Formularz kontaktowy, gotowy do działania</li>
+    <li>Wsparcie przy wdrożeniu i podstawowe poprawki</li>
   </ul>
 
   <h2>Cena i czas</h2>
-  <p>✅ <strong>500 zł</strong> (250 zł zaliczki, reszta po demo)<br/>
-     ✅ Czas realizacji: 1-2 godziny</p>
+  <div style="font-size: 1.2rem; margin-bottom: 10px;">
+    ⏱️ Średni czas realizacji: <span id="countdown" style="font-weight: bold;">01:30:00</span>
+  </div>
+  <script>
+    function startCountdown(duration, display) {
+      let timer = duration, hours, minutes, seconds;
+      setInterval(function () {
+        hours = String(Math.floor(timer / 3600)).padStart(2, '0');
+        minutes = String(Math.floor((timer % 3600) / 60)).padStart(2, '0');
+        seconds = String(timer % 60).padStart(2, '0');
+        display.textContent = `${hours}:${minutes}:${seconds}`;
+        if (--timer < 0) timer = duration;
+      }, 1000);
+    }
+    window.onload = function () {
+      const thirtyMinutes = 60 * 90;
+      const display = document.getElementById('countdown');
+      startCountdown(thirtyMinutes, display);
+    };
+  </script>
+
+  <p><strong>✅ 500 zł brutto</strong> (250 zł zaliczki, reszta po demo)<br/>
+     ✅ Czas realizacji: 1–2 godziny</p>
 
   <h2>Dlaczego warto?</h2>
-  <p>Bo działam szybko, konkretne efekty bez zbędnych formalności. Czas to pieniądz, a ja pomogę Ci go zaoszczędzić.</p>
+  <p>Działam szybko, konkretnie i bez zbędnych formalności. Czas to pieniądz – a ja pomogę Ci go zaoszczędzić.</p>
 
-  <a class="cta" href="#contact-section" onclick="showContactDetails()">Zamów teraz</a>
+  <a class="cta" href="#kontakt">Zamów teraz</a>
 </section>
 
-<footer id="contact-section" class="hidden">
-  <h2>Skontaktuj się ze mną:</h2>
-  <p id="contact-details">Aby zamówić stronę, dodaj mnie na Discord: <span onclick="window.open('https://discord.com/users/old1830', '_blank')">old1830</span><br/> 
-     Lub napisz na email: <span onclick="window.location.href = 'mailto:mainunm649@gmail.com';">mainunm649@gmail.com</span></p>
-  <p>Po skontaktowaniu się, zaczynamy pracę natychmiast!</p>
-</footer>
+<section>
+  <h2>Jak to działa?</h2>
+  <ol>
+    <li>Kontaktujesz się ze mną przez formularz lub Discord/email</li>
+    <li>Omawiamy potrzeby i wybieramy styl strony</li>
+    <li>Wpłacasz zaliczkę 250 zł</li>
+    <li>W ciągu 1–2 godzin dostajesz gotowy projekt demo</li>
+    <li>Po akceptacji dopłacasz pozostałe 250 zł</li>
+    <li>Gotowa strona trafia do Ciebie lub na Twój serwer</li>
+  </ol>
+</section>
 
-<script>
-  function showContactDetails() {
-    document.getElementById("contact-section").classList.remove("hidden");
-    document.querySelector("footer").scrollIntoView({behavior: "smooth"});
-  }
-  
-</script>
+<section>
+  <h2>Opinie klientów</h2>
+  <div class="testimonial">"Błyskawiczna robota! Strona gotowa szybciej niż zdążyłem zapłacić. Polecam!" – Michał K.</div>
+  <div class="testimonial">"Super kontakt, mega estetyka. Na pewno wrócę z kolejnym zleceniem." – Anna W.</div>
+  <div class="testimonial">"Jakość jak z agencji, ale 10 razy szybciej i taniej. Szacun!" – Bartek R.</div>
+</section>
+
+<section>
+  <h2>Najczęstsze pytania (FAQ)</h2>
+  <details class="faq-item"><summary>❓ Czy mogę później zmienić coś na stronie?</summary>
+    <p>Tak – oferuję darmowe poprawki po wdrożeniu oraz instrukcję edycji.</p>
+  </details>
+  <details class="faq-item"><summary>💰 Jak wygląda płatność?</summary>
+    <p>Najpierw 250 zł zaliczki, po demo dopłacasz 250 zł. Możliwość przelewu lub BLIK.</p>
+  </details>
+  <details class="faq-item"><summary>🕒 Co jeśli nie zdążę w 1-2 godziny?</summary>
+    <p>To bardzo rzadkie – ale jeśli wystąpi opóźnienie, informuję od razu. Wciąż będzie szybko.</p>
+  </details>
+</section>
+
+<section>
+  <h2>Kim jestem?</h2>
+  <p>Jestem praktykiem, nie teoretykiem. Tworzę strony, które sprzedają – szybko, konkretnie i estetycznie. Mam za sobą kilka projektów, które realnie pomogły klientom zwiększyć zyski i wyglądać profesjonalnie w oczach odbiorców.</p>
+  <p>Nie marnuję Twojego czasu – działam natychmiast, słucham uważnie, dowożę konkretny efekt. Zamiast obietnic – pokazuję efekt w ciągu godziny.</p>
+</section>
+
+<section id="kontakt">
+  <h2>Skontaktuj się ze mną</h2>
+  <form id="contact-form" action="https://formspree.io/f/xvgayrzl" method="POST">
+    <input type="text" name="name" placeholder="Imię i nazwisko" required>
+    <input type="email" name="_replyto" placeholder="Twój email" required>
+    <textarea name="message" placeholder="Twoja wiadomość" rows="5" required></textarea>
+    <div class="g-recaptcha" data-sitekey="6LdPa0ArAAAAAOMZ54t6OHGIuaR21911Lb20fH8m"></div>
+    <button type="submit">Wyślij wiadomość</button>
+  </form>
+
+  <div class="direct-contact">
+    <p>📧 Bezpośredni kontakt: <a href="mailto:mainunm649@gmail.com">mainunm649@gmail.com</a><br>
+    💬 Discord: <a href="https://discordapp.com/users/old1830" target="_blank">old1830</a></p>
+  </div>
+
+  <p style="margin-top: 20px; font-size: 0.95rem; color: #8b949e;">Po wysłaniu formularza skontaktuję się z Tobą jak najszybciej.</p>
+</section>
+
+<footer>
+  <p>© 2025 Profesjonalna Strona Sprzedażowa – Wykonanie: stronyold123.github.io</p>
+</footer>
 
 </body>
 </html>
