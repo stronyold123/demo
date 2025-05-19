@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Strona Sprzedażowa - Profesjonalna Oferta</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #1c1c1c;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: -50px;
+      border-radius: 10px;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    ul {
+      margin: 20px 0;
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+    ul li {
+      font-size: 1.1rem;
+    }
+    .cta {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      margin-top: 30px;
+      transition: background-color 0.3s ease;
+    }
+    .cta:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 40px;
+      background-color: #2f2f2f;
+      color: white;
+    }
+    footer p {
+      font-size: 1rem;
+    }
+    #contact-details {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+      margin-top: 30px;
+    }
+    #contact-details span {
+      color: #007bff;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Profesjonalna Strona Sprzedażowa w 1-2 godziny</h1>
+  <p>Gotowa strona dopasowana do Twojego biznesu – szybko, skutecznie i profesjonalnie.</p>
+</header>
+
+<section>
+  <h2>Co dostajesz?</h2>
+  <ul>
+    <li>Responsywną stronę 1-pager, idealną do Twojej branży</li>
+    <li>Przyciągający uwagę tekst oferty</li>
+    <li>Ewentualne wsparcie</li>
+  </ul>
+
+  <h2>Cena i czas</h2>
+  <p>✅ <strong>500 zł brutto</strong> (250 zł zaliczki, reszta po demo)<br/>
+     ✅ Czas realizacji: 1-2 godziny</p>
+
+  <h2>Dlaczego warto?</h2>
+  <p>Bo działam szybko, konkretne efekty bez zbędnych formalności. Czas to pieniądz, a ja pomogę Ci go zaoszczędzić.</p>
+
+  <a class="cta" href="#contact-section" onclick="showContactDetails()">Zamów teraz</a>
+</section>
+
+<footer id="contact-section" class="hidden">
+  <h2>Skontaktuj się ze mną:</h2>
+  <p id="contact-details">Aby zamówić stronę, dodaj mnie na Discord: <span onclick="window.open('https://discord.com/users/old1830', '_blank')">old1830</span><br/> 
+     Lub napisz na email: <span onclick="window.location.href = 'mailto:mainunm649@gmail.com';">mainunm649@gmail.com</span></p>
+  <p>Po skontaktowaniu się, zaczynamy pracę natychmiast!</p>
+</footer>
+
+<script>
+  function showContactDetails() {
+    document.getElementById("contact-section").classList.remove("hidden");
+    document.querySelector("footer").scrollIntoView({behavior: "smooth"});
+  }
+  
+</script>
+
+</body>
+</html>
