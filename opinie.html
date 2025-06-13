@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opinie</title>
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafc;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: #1e2a38;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #e1e8f0;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      background-color: #4dabf7;
+      color: white;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      padding: 0 15px;
+      text-align: center;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #1e2a38;
+    }
+
+    /* Filtr gwiazdkowy */
+    .filter-stars {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-stars button {
+      background: #e1e8f0;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1971c2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .filter-stars button:hover,
+    .filter-stars button.active {
+      background-color: #4dabf7;
+      color: white;
+    }
+
+    .opinie-lista {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      text-align: left;
+    }
+
+    .opinia {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 30px;
+      box-shadow: 0 12px 30px rgba(77,171,247,0.15);
+      font-size: 1.1rem;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 220px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s forwards;
+    }
+    .opinia:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(77,171,247,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gwiazdki {
+      font-size: 1.5rem;
+      color: #f5a623;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+
+    .tekst {
+      margin: 0 0 25px 0;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .autor {
+      font-weight: 600;
+      color: #1971c2;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .autor img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      flex-shrink: 0;
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-top: 70px;
+      padding-bottom: 20px;
+    }
+
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .opinie-lista {
+        grid-template-columns: 1fr;
+      }
+      .filter-stars {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo" aria-label="Logo firmy">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="24" cy="24" r="24" fill="#4dabf7"/>
+      <path d="M12 36V12L24 30L36 12V36" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="co-oferujemy.html">Co oferuję</a>
+    <a href="opinie.html" class="active">Opinie</a>
+    <a href="ceny.html">Ceny</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Co mówią moi klienci</h1>
+
+  <div class="filter-stars" aria-label="Filtr opinii wg gwiazdek">
+    <button data-filter="all" class="active" aria-pressed="true" title="Pokaż wszystkie opinie">Wszystkie</button>
+    <button data-filter="5" aria-pressed="false" title="Pokaż opinie 5 gwiazdkowe">★★★★★</button>
+    <button data-filter="4" aria-pressed="false" title="Pokaż opinie 4 gwiazdkowe">★★★★☆</button>
+    <button data-filter="3" aria-pressed="false" title="Pokaż opinie 3 gwiazdkowe">★★★☆☆</button>
+  </div>
+
+  <section class="opinie-lista" id="opinie-lista">
+
+    <article class="opinia" data-stars="5" style="animation-delay: 0.1s;">
+      <div class="gwiazdki">★★★★★</div>
+      <p class="tekst">„Marcin to turbo ogarnięty gość. Zrozumiał mój pomysł lepiej niż ja sama. Strona wygląda <strong>profesjonalnie</strong>, działa szybko i zbiera same komplementy. Zero spiny, 100% efektu.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=5" alt="Kasia" />
+        Kasia, właścicielka sklepu online
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="5" style="animation-delay: 0.2s;">
+      <div class="gwiazdki">★★★★★</div>
+      <p class="tekst">„Zamówiłem landing i w 3 dni miałem gotowy projekt. <strong>Stylowy, lekki i dokładnie taki, jak chciałem</strong>. Fajna komunikacja, zero gadania w kółko. Polecam!”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=15" alt="Michał" />
+        Michał, freelancer IT
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="5" style="animation-delay: 0.3s;">
+      <div class="gwiazdki">★★★★★</div>
+      <p class="tekst">„Jestem zakochana w swojej stronie! <strong>Responsywna, przejrzysta, nowoczesna</strong>. Marcin zadbał o wszystko, nawet doradził z brandingiem. <em>5 gwiazdek to mało.</em>”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=25" alt="Ania" />
+        Ania, blogerka modowa
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="4" style="animation-delay: 0.4s;">
+      <div class="gwiazdki">★★★★☆</div>
+      <p class="tekst">„Strona zrobiona dobrze i szybko, ale przede wszystkim <strong>Marcin słucha</strong>. To nie był kolejny typowy wykonawca, tylko partner do projektu. Zdecydowanie warto.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=35" alt="Tomek" />
+        Tomek, fotograf
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="5" style="animation-delay: 0.5s;">
+      <div class="gwiazdki">★★★★★</div>
+      <p class="tekst">„Świetna współpraca, a efekt końcowy przerósł moje oczekiwania. Szczególnie doceniam <strong>dbałość o detale</strong> i terminowość.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=45" alt="Karolina" />
+        Karolina, właścicielka kawiarni
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="4" style="animation-delay: 0.6s;">
+      <div class="gwiazdki">★★★★☆</div>
+      <p class="tekst">„Generalnie wszystko poszło sprawnie i bez problemów. Może czasem brakowało trochę inicjatywy w pomysłach, ale efekt końcowy jest solidny.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=55" alt="Paweł" />
+        Paweł, właściciel startupu
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="5" style="animation-delay: 0.7s;">
+      <div class="gwiazdki">★★★★★</div>
+      <p class="tekst">„Marcin to prawdziwy specjalista, który zna się na rzeczy. Dzięki niemu moja strona zyskała nowoczesny wygląd i świetne działanie.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=65" alt="Daniel" />
+        Daniel, projektant wnętrz
+      </div>
+    </article>
+
+    <article class="opinia" data-stars="3" style="animation-delay: 0.8s;">
+      <div class="gwiazdki">★★★☆☆</div>
+      <p class="tekst">„Strona działa poprawnie, ale czas realizacji trochę się wydłużył. Ogólnie polecam, ale warto ustalić wszystkie terminy dokładnie na początku.”</p>
+      <div class="autor">
+        <img src="https://i.pravatar.cc/40?img=75" alt="Łukasz" />
+        Łukasz, właściciel małej firmy
+      </div>
+    </article>
+
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 – Strony WWW z pasją
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-stars button');
+  const opinie = document.querySelectorAll('.opinia');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Reset aktywności
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
+
+      const filter = button.getAttribute('data-filter');
+
+      opinie.forEach(opinia => {
+        if (filter === 'all' || opinia.getAttribute('data-stars') === filter) {
+          opinia.style.display = 'flex';
+          // Reset animacji - animacja pojawiania się
+          opinia.style.opacity = 0;
+          opinia.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            opinia.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            opinia.style.opacity = 1;
+            opinia.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          opinia.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

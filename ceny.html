@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cennik</title>
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafc;
+      color: #222;
+    }
+    header {
+      background: #1e2a38;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+    nav a {
+      color: #e1e8f0;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      background-color: #4dabf7;
+      color: white;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto 60px;
+      padding: 0 15px;
+      text-align: center;
+    }
+    h1 {
+      font-weight: 600;
+      font-size: 2.6rem;
+      margin-bottom: 15px;
+      color: #1e2a38;
+    }
+    .lead-text {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: #555;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .note-text {
+      max-width: 700px;
+      margin: 20px auto 40px;
+      color: #333;
+      font-size: 1rem;
+      font-style: italic;
+      background: #eaf4ff;
+      border-left: 4px solid #4dabf7;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(77,171,247,0.1);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(77,171,247,0.15);
+      padding: 30px 25px 25px 25px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(77,171,247,0.35);
+    }
+    .icon {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      color: #4dabf7;
+    }
+    h3 {
+      margin-top: 0;
+      font-weight: 700;
+      color: #1e2a38;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      letter-spacing: 0.03em;
+    }
+    .price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1971c2;
+      margin: 15px 0 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    ul li {
+      margin-bottom: 10px;
+      padding-left: 22px;
+      position: relative;
+    }
+    ul li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #4dabf7;
+      font-weight: 700;
+    }
+    a.btn {
+      background: #4dabf7;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(77,171,247,0.3);
+      user-select: none;
+      margin-top: auto;
+    }
+    a.btn:hover {
+      background: #1565c0;
+      box-shadow: 0 6px 20px rgba(21,101,192,0.5);
+    }
+    /* Ukryty rozszerzony opis */
+    .extra-desc {
+      max-height: 0;
+      overflow: hidden;
+      color: #333;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 0;
+      margin-top: 0;
+    }
+    /* Po najechaniu na kartę pokazujemy opis */
+    .card:hover .extra-desc {
+      max-height: 500px; /* wystarczająco dużo na tekst */
+      padding-top: 15px;
+      margin-top: 15px;
+      border-top: 1px solid #4dabf7;
+    }
+    /* Mały cień dla podkreślenia */
+    .extra-desc p {
+      margin: 0 0 8px 0;
+    }
+    footer {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-top: 70px;
+      padding-bottom: 20px;
+    }
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo" aria-label="Logo firmy">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="24" cy="24" r="24" fill="#4dabf7"/>
+      <path d="M12 36V12L24 30L36 12V36" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="co-oferujemy.html">Co oferuję</a>
+    <a href="opinie.html">Opinie</a>
+    <a href="ceny.html" class="active">Ceny</a>
+    <a href="kontakt.html">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Cennik</h1>
+  <p class="lead-text">
+    Wybierz pakiet idealnie dopasowany do Twoich potrzeb. Każda realizowana przeze mnie strona jest responsywna, szybka i intuicyjna w obsłudze, dzięki czemu Twoja obecność w sieci zrobi świetne wrażenie na klientach.
+  </p>
+
+  <p class="note-text">
+    <strong>Ważne!</strong> Ceny podane poniżej są orientacyjne. Jako początkujący wykonawca oferuję elastyczne podejście do wyceny, a także atrakcyjne rabaty i warunki dla pierwszych klientów. Chętnie porozmawiam o indywidualnych potrzebach i zaproponuję korzystną ofertę.
+  </p>
+
+  <div class="pricing-grid">
+    <div class="card" tabindex="0" aria-describedby="desc-starter">
+      <div class="icon" aria-hidden="true">🚀</div>
+      <h3>Starter</h3>
+      <div class="price">550 zł</div>
+      <ul>
+        <li>Strona wizytówka – pojedyncza, estetyczna strona internetowa, która zaprezentuje Twoją działalność</li>
+        <li>Responsywny design – dopasowanie do urządzeń mobilnych, tabletów i desktopów</li>
+        <li>Formularz kontaktowy – prosty sposób, aby Twoi klienci mogli się z Tobą szybko skontaktować</li>
+        <li>Instalacja i konfiguracja na serwerze, aby wszystko działało bez zarzutu</li>
+        <li>Optymalizacja prędkości ładowania, by Twoja strona była szybka i przyjazna dla użytkownika</li>
+        <li>Podstawowe zabezpieczenia i aktualizacje, które chronią stronę przed atakami</li>
+      </ul>
+      <div class="extra-desc" id="desc-starter">
+        <p><strong>Dodatkowe korzyści:</strong></p>
+        <p>W pakiecie Starter skupiam się na prostocie i efektywności. To idealne rozwiązanie dla osób rozpoczynających swoją działalność lub potrzebujących szybkiej obecności online bez zbędnych dodatków.</p>
+        <p>Możliwość późniejszej rozbudowy o funkcje takie jak blog, galeria czy sklep internetowy.</p>
+      </div>
+      <a href="kontakt.html" class="btn">Zapytaj o ofertę</a>
+    </div>
+
+    <div class="card" tabindex="0" aria-describedby="desc-standard">
+      <div class="icon" aria-hidden="true">🔥</div>
+      <h3>Standard</h3>
+      <div class="price">900 zł</div>
+      <ul>
+        <li>Strona firmowa z kilkoma podstronami (np. o nas, oferta, kontakt)</li>
+        <li>Responsywny i nowoczesny design z animacjami</li>
+        <li>Formularz kontaktowy oraz mapka Google</li>
+        <li>Podstawowa optymalizacja SEO – lepsza widoczność w wyszukiwarkach</li>
+        <li>Panel CMS do samodzielnej edycji treści (np. WordPress lub inny CMS)</li>
+        <li>Wsparcie techniczne przez 1 miesiąc po wdrożeniu</li>
+      </ul>
+      <div class="extra-desc" id="desc-standard">
+        <p><strong>Dodatkowe korzyści:</strong></p>
+        <p>Pakiet Standard jest idealny dla małych firm i freelancerów, którzy potrzebują profesjonalnej i rozbudowanej strony internetowej z łatwą możliwością aktualizacji treści.</p>
+        <p>Projekt zawiera estetyczne animacje oraz dodatkowe sekcje, które pomogą wyróżnić Twoją markę.</p>
+      </div>
+      <a href="kontakt.html" class="btn">Zapytaj o ofertę</a>
+    </div>
+
+    <div class="card" tabindex="0" aria-describedby="desc-pro">
+      <div class="icon" aria-hidden="true">💎</div>
+      <h3>Pro</h3>
+      <div class="price">1300 zł</div>
+      <ul>
+        <li>Rozbudowana strona z wieloma podstronami i zaawansowanymi funkcjami</li>
+        <li>Pełna responsywność, animacje i interaktywne elementy UI</li>
+        <li>Integracja z social media, newsletterem oraz systemem rezerwacji</li>
+        <li>Zaawansowana optymalizacja SEO i szybkości działania</li>
+        <li>Dedykowany panel CMS z możliwością rozbudowy i personalizacji</li>
+        <li>Wsparcie techniczne przez 3 miesiące oraz szkolenie z obsługi strony</li>
+      </ul>
+      <div class="extra-desc" id="desc-pro">
+        <p><strong>Dodatkowe korzyści:</strong></p>
+        <p>Pakiet Pro to kompleksowe rozwiązanie dla przedsiębiorców, którzy oczekują nie tylko strony wizytówki, ale pełnej platformy internetowej do zarządzania biznesem online.</p>
+        <p>Oferuję indywidualne konsultacje i dedykowane funkcje dopasowane do Twoich potrzeb.</p>
+      </div>
+      <a href="kontakt.html" class="btn">Zapytaj o ofertę</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  &copy; 2025 – Strony WWW z pasją
+</footer>
+
+</body>
+</html>

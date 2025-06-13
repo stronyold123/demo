@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt</title>
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f1f3f5;
+      color: #222;
+    }
+
+    header {
+      background: #1e2a38;
+      padding: 10px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #e1e8f0;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: #4dabf7;
+      color: white;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px 20px;
+      text-align: center;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(77,171,247,0.1);
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #1e2a38;
+    }
+
+    .icon {
+      font-size: 3rem;
+      color: #4dabf7;
+      margin-bottom: 10px;
+      user-select: none;
+      display: inline-flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    a.email-link {
+      display: inline-block;
+      background: #4dabf7;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 6px 18px rgba(77,171,247,0.3);
+    }
+
+    a.email-link:hover {
+      background-color: #228be6;
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      margin-top: 70px;
+      padding-bottom: 20px;
+    }
+
+    @media (max-width: 500px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      main {
+        margin: 40px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo" aria-label="Logo firmy">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="24" cy="24" r="24" fill="#4dabf7"/>
+      <path d="M12 36V12L24 30L36 12V36" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <nav>
+    <a href="index.html">Start</a>
+    <a href="co-oferujemy.html">Co oferuję</a>
+    <a href="opinie.html">Opinie</a>
+    <a href="ceny.html">Ceny</a>
+    <a href="kontakt.html" class="active">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+  <div class="icon" aria-hidden="true">📬 👤</div>
+  <h1>Skontaktuj się ze mną</h1>
+  <p>Masz pomysł, pytanie albo chcesz po prostu pogadać o stronie? Śmiało – odezwij się!</p>
+  <a href="mailto:malpaw498@gmail.com" class="email-link">malpaw498@gmail.com</a>
+</main>
+
+<footer>
+  &copy; 2025 – Strony WWW z pasją
+</footer>
+
+</body>
+</html>
